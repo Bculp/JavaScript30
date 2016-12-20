@@ -58,7 +58,99 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+// current key codes are for caps only
+let keyA = document.querySelectorAll("[data-key='65']")
+let keyS = document.querySelectorAll("[data-key='83']")
+let keyD = document.querySelectorAll("[data-key='68']")
+let keyF = document.querySelectorAll("[data-key='70']")
+let keyG = document.querySelectorAll("[data-key='71']")
+let keyH = document.querySelectorAll("[data-key='72']")
+let keyJ = document.querySelectorAll("[data-key='74']")
+let keyK = document.querySelectorAll("[data-key='75']")
+let keyL = document.querySelectorAll("[data-key='76']")
 
+
+  document.onkeydown = function(e) {
+    switch(e.keyCode) {
+      case 65:
+        keyA[0].className += ' playing';
+        keyA[1].currentTime = 0;
+        keyA[1].play()
+        break;
+      case 83:
+        keyS[0].className += ' playing';
+        keyS[1].currentTime = 0;
+        keyS[1].play(); 
+        break;
+      case 68:
+        keyD[0].className += ' playing';
+        keyD[1].currentTime = 0;
+        keyD[1].play(); 
+        break;
+      case 70:
+        keyF[0].className += ' playing';
+        keyF[1].currentTime = 0;
+        keyF[1].play(); 
+        break;
+      case 71:
+        keyG[0].className += ' playing';
+        keyG[1].currentTime = 0;
+        keyG[1].play(); 
+        break;
+      case 72:
+        keyH[0].className += ' playing';
+        keyH[1].currentTime = 0;
+        keyH[1].play(); 
+        break;
+      case 74:
+        keyJ[0].className += ' playing';
+        keyJ[1].currentTime = 0;
+        keyJ[1].play(); 
+        break;
+      case 75:
+        keyK[0].className += ' playing';
+        keyK[1].currentTime = 0;
+        keyK[1].play(); 
+        break;
+      case 76:
+        keyL[0].className += ' playing';
+        keyL[1].currentTime = 0;
+        keyL[1].play(); 
+        break;
+    }
+  }
+
+  document.onkeyup = function(e) {
+    switch(e.keyCode) {
+      case 65:
+        keyA[0].className = 'key';
+        break;
+      case 83:
+        keyS[0].className = 'key';
+        break;
+      case 68:
+        keyD[0].className = 'key';
+        break;
+      case 70:
+        keyF[0].className = 'key';
+        break;
+      case 71:
+        keyG[0].className = 'key';
+        break;
+      case 72:
+        keyH[0].className = 'key';
+        break;
+      case 74:
+        keyJ[0].className = 'key';
+        break;
+      case 75:
+        keyK[0].className = 'key';
+        break;
+      case 76:
+        keyL[0].className = 'key';
+        break;
+    }
+  }
 </script>
 
 
