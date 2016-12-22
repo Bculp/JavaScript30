@@ -33,28 +33,81 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    let filter = inventors.filter((element, index) => {
+      return element.year < 1600 && element.year >= 1500
+    })
+    console.log(filter)
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    let result = inventors.map(inventor => `${inventor.first}, ${inventor.last}`)
+    console.log(result)
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    inventors.sort((inventor1, inventor2) => {
+      if (inventor1.year < inventor2.year) return -1;
+      if (inventor1.year > inventor2.year) return 1;
+      return 0;
+    })
+
+    console.log(inventors)
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
-
+    let yearCount = inventors.reduce((initialVal, currentVal) => {
+      return initialVal += (currentVal.passed - currentVal.year)
+    },0)
+    console.log(yearCount)
     // 5. Sort the inventors by years lived
+    inventors.sort((inventor, inventor2) => {
+      if (inventor.passed - inventor.year > inventor2.passed-inventor2.year) {
+        return -1;
+      }
+      if (inventor.passed - inventor.year < inventor2.passed-inventor2.year) {
+        return 1;
+      } 
+    })
+    console.log(inventors)
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // Boulevards.map(index => {
+    //   if (index.indexOf('de') > -1) {
+    //     return index;
+    //   }
+    // })
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
 
+    people.sort((person1, person2) => {
+      let lastNameIndex = person1.indexOf(',') + 2;
+      let lastNameIndex2 = person2.indexOf(',') + 2;
+      if (person1[lastNameIndex] < person2[lastNameIndex2]) {
+        return -1;
+      }
+      if (person1[lastNameIndex] > person2[lastNameIndex2]) {
+        return 1;
+      }
+      // console.log(person1[lastNameIndex])
+    })
+    console.log(people)
+
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    let redResult = data.reduce((obj, word) => {
+      if (!obj[word]) {
+        obj[word] = 0;
+      }
+      obj[word] ++;
+      return obj;
+    },{})
+
+    console.log(redResult)
 
   </script>
 </body>
