@@ -17,6 +17,48 @@
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
+let places = [];
+
+fetch(endpoint)
+.then(res => res.json())
+.then(data => places.push(...data))
+
+// have data now much filter it based on text and then display these filtered results and then highlight matching text and show 
+// population in number w/ commas form
+
+function filterPlaces(word, placesArr) {
+  return placesArr.filter(place => {
+    let cityCaps = place.city.toUpperCase();
+    let stateCaps = place.state.toUpperCase();
+    let wordCaps = word.toUpperCase();
+    return cityCaps.indexOf(wordCaps) > -1 || stateCaps.indexOf(wordCaps) > -1
+  })
+}
+
+function comifyNumber(num) {
+  return num.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+}
+
+function callFilterWithInput() {
+  let filteredResults = filterPlaces(this.value, places)
+  suggestions.innerHTML = filteredResults.map(place => {
+    const regex = new RegExp(this.value, 'gi');
+    const city = place.city.replace(regex, `<span class='hl'>${this.value}</span>`);
+    const state = place.state.replace(regex, `<span class='hl'>${this.value}</span>`);
+    return `
+    <li> 
+      <span>${city}, ${state}</span>
+      <span>${comifyNumber(place.population)}</span>
+    </li>`
+  }).join('')
+}
+
+let input = document.querySelector('.search');
+let suggestions = document.querySelector('.suggestions');
+input.addEventListener('keyup', callFilterWithInput);
+
+
+
 </script>
   </body>
 </html>
