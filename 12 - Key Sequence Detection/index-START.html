@@ -7,6 +7,20 @@
 </head>
 <body>
 <script>
+	let secretCode = 'osu';
+	let input = [];
+
+	function collectKeys(e) {
+		input.push(e.key)
+		input.splice(-secretCode.length - 1, input.length - secretCode.length)
+		console.log
+		if (input.join('').includes(secretCode)) {
+			cornify_add();
+		}
+	}
+	document.addEventListener('keypress', collectKeys)
+
+
 </script>
 </body>
 </html>
