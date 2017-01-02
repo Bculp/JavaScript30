@@ -182,6 +182,29 @@
     </li>
 
 <script>
+  let liArray = document.querySelectorAll('[data-time]');
+  
+  let timesArray = [];
+
+  liArray.forEach(element => timesArray.push(element.dataset.time))
+
+  const seconds = timesArray.map(time => {
+    const [mins, secs] = time.split(':').map(parseFloat)
+    return (mins * 60) + secs;
+  })
+  .reduce((total, currentSeconds) => {
+    return total + currentSeconds
+  })
+
+  let secondsLeft = seconds;
+  const hours = Math.floor(secondsLeft / 3600);
+  secondsLeft = secondsLeft % 3600;
+
+  const mins = Math.floor(secondsLeft / 60);
+  secondsLeft = secondsLeft % 60;
+
+  console.log(hours, mins, secondsLeft)
+
 </script>
 </body>
 </html>
