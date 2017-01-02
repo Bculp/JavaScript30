@@ -45,6 +45,37 @@
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
+let sortedBands = bands.sort((first, second) => {
+  let firstSpace = first.indexOf(' ');
+  let secondSpace = second.indexOf(' ');
+  let firstWord = first.slice(0, firstSpace);
+  let secondWord = second.slice(0, secondSpace);
+  let newFirstWord = first;
+  let newSecondWord = second;
+  if (firstWord === 'A' || firstWord === 'An' || firstWord === 'The') {
+    newFirstWord = first.slice(firstSpace + 1)
+  }
+  if (secondWord === 'A' || secondWord === 'An' || secondWord === 'The') {
+    newSecondWord = second.slice(secondSpace + 1)
+  }
+
+  if (newFirstWord < newSecondWord) {
+    return -1;
+  }
+
+  if (newFirstWord > newSecondWord) {
+    return 1;
+  }
+})
+
+console.log(sortedBands)
+
+let listEl = document.querySelector('#bands')
+listEl.innerHTML = sortedBands.map(band => {
+  return `
+    <li>${band}</li>
+  `
+}).join('');
 
 </script>
 
