@@ -57,3 +57,7 @@ a {
   margin:0 20px;
   color:black;
 }
+
+.hidden {
+  visibility: hidden;
+}
