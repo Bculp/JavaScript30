@@ -35,6 +35,58 @@
   const options = document.querySelectorAll('[type="range"], [name="text"]');
   const speakButton = document.querySelector('#speak');
   const stopButton = document.querySelector('#stop');
+  const synth = window.speechSynthesis;
+  const form = document.querySelector('textarea');
+
+  function speakFn() {
+    msg.text = form.value;
+    synth.speak(msg)
+  }
+
+  function stopSpeaking() {
+    synth.cancel();
+  }
+
+  function handleChange() {
+    let name = this.name;
+    msg[`${name}`] = this.value;
+    synth.cancel();
+    speakFn()
+  }
+
+  speakButton.addEventListener('click', speakFn)
+  stopButton.addEventListener('click', stopSpeaking)
+  options.forEach(option => {
+    option.addEventListener('change', handleChange)
+  })
+
+  let item = document.createElement('option');
+
+  let timer = setInterval(function() {
+    voices = synth.getVoices();
+    voices = voices.filter(voice => {
+      return voice.lang.includes('en')
+    })
+
+    if (voices.length !== 0) {
+      voices.map((voice, index) => {
+        item = document.createElement('option');
+        item.value = index;
+        item.textContent = voice.name;
+        voicesDropdown.appendChild(item)
+      })
+      clearInterval(timer);
+    }
+}, 200);
+
+  function selectVoice() {
+    msg.voice = voices[this.value];
+    synth.cancel();
+    speakFn();
+  }
+
+  voicesDropdown.addEventListener('change', selectVoice)
+
 </script>
 
 </body>
